@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import * as sgMail from '@sendgrid/mail';
+import fetch from 'node-fetch';
 
 export interface IEmailConfig
 {
@@ -73,4 +74,4 @@ export class ReportLib
     }
 }
 
-export {React};
+export {React, fetch};
