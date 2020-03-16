@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import * as sgMail from '@sendgrid/mail';
 import fetch from 'node-fetch';
+import * as moment from 'moment';
+import { CosmosClient } from '@azure/cosmos';
 
 export interface IEmailConfig
 {
@@ -9,9 +11,23 @@ export interface IEmailConfig
     from:string;
     simulate?:boolean;
 }
+
+export interface IMongoConfig
+{
+    connectionString:string;
+    database:string;
+}
+
+export interface ICosmosConfig
+{
+    connectionString:string;
+}
+
 export interface IConfig
 {
     email:IEmailConfig;
+    mongo:IMongoConfig;
+    cosmos:ICosmosConfig;
 }
 
 export class ReportLib
@@ -22,7 +38,28 @@ export class ReportLib
         {
             api:"",
             from:""
+        },
+        mongo:
+        {
+            connectionString:"",
+            database:""
+        },
+        cosmos:
+        {
+            connectionString:""
         }
+    }
+
+    setCosmosConfig(cosmosConfig:ICosmosConfig)
+    {
+        this.config.cosmos = cosmosConfig;
+        return this;
+    }
+
+
+    createCosmosClient()
+    {
+        return new CosmosClient(this.config.cosmos.connectionString);
     }
 
     setEmailConfig(emailConfig:IEmailConfig)
@@ -74,4 +111,4 @@ export class ReportLib
     }
 }
 
-export {React, fetch};
+export {React, fetch, moment};
