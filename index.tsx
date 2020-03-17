@@ -100,7 +100,7 @@ export class ReportLib
                 subject:title
             }).then(()=>
             {
-                console.log("mail sent!");
+                console.log(`email sent to ${to}`);
             });  
     }
 
