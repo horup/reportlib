@@ -2,7 +2,7 @@
   "name": "reportlib",
   "version": "1.0.0",
   "description": "A library that can be used to generate, store data in a db and send reports",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "npm run build",
