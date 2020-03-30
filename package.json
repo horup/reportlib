@@ -4,7 +4,8 @@
   "description": "A library that can be used to generate, store data in a db and send reports",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "tsc -d"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "node-fetch": "^2.6.0",
     "npm": "^6.14.2",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "typescript": "^3.8.3"
   }
 }
