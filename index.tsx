@@ -4,6 +4,7 @@ import * as sgMail from '@sendgrid/mail';
 import fetch from 'node-fetch';
 import * as moment from 'moment';
 import { CosmosClient } from '@azure/cosmos';
+import * as http from 'http';
 
 export interface IEmailConfig
 {
@@ -32,6 +33,7 @@ export interface IConfig
 
 export class ReportLib
 {
+    httpServer:http.Server;
     config:IConfig =
     {
         email:
@@ -47,6 +49,32 @@ export class ReportLib
         cosmos:
         {
             connectionString:""
+        }
+    }
+
+    startHttp(port:number, get:()=>string)
+    {
+       if (this.httpServer == null)
+       {
+           this.httpServer = new http.Server((req,res)=>
+           {
+               if (req.method == 'GET')
+               {
+                   res.writeHead(200);
+                   res.end(get());
+               }
+           });
+           
+           this.httpServer.listen(port);
+       } 
+    }
+
+    stopHttp()
+    {
+        if (this.httpServer)
+        {
+            this.httpServer.close();
+            this.httpServer = null;
         }
     }
 
