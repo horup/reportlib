@@ -52,16 +52,17 @@ export class ReportLib
         }
     }
 
-    startHttp(port:number, get:()=>string)
+    startHttp(port:number, get:()=>Promise<string>)
     {
        if (this.httpServer == null)
        {
-           this.httpServer = new http.Server((req,res)=>
+           this.httpServer = new http.Server(async (req,res)=>
            {
                if (req.method == 'GET')
                {
+                   let ret = await get();
                    res.writeHead(200);
-                   res.end(get());
+                   res.end(ret);
                }
            });
            

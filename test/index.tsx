@@ -7,5 +7,8 @@ console.log(html);
 
 lib.startHttp(8080, ()=>
 {
-    return html;
+    return new Promise((v)=>
+    {
+        return html;
+    })
 })
