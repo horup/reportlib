@@ -5,10 +5,10 @@ const index = <div>Hello Report Lib!</div>;
 const html = lib.renderToString(index);
 console.log(html);
 
-lib.startHttp(8080, ()=>
+lib.startHttp(8080, () =>
 {
-    return new Promise((v)=>
+    return new Promise<string>((v)=>
     {
-        return html;
-    })
+        v(html);
+    });
 })

@@ -58,11 +58,16 @@ export class ReportLib
        {
            this.httpServer = new http.Server(async (req,res)=>
            {
-               if (req.method == 'GET')
+               if (req.method == 'GET' && req.url == '/')
                {
                    let ret = await get();
                    res.writeHead(200, {"Content-Type":"text/html; charset=utf-8"});
                    res.end(ret);
+               }
+               else
+               {
+                   res.writeHead(400);
+                   res.end();
                }
            });
            
